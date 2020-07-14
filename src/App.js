@@ -11,17 +11,26 @@ class App extends Component {
             {name:"Sylvia" , edad: 20 },
             {name:"Erick" , edad: 25 },
         ],
-        otherState: "otro estado de prueba"
+        otherState: "otro estado de prueba",
+        show: false
     }
     
     atributo = "esto es la variable";
 
-    cambiarNombre = (NuevoNombre) => {
-        this.setState({ persons: [ 
-            {name: NuevoNombre , edad: 30 },
-            {name: "Ilyana" , edad: 20 },
-            {name: "Fernando" , edad: 25 },
-        ] })
+    mostrar = () => {
+        const doesShow = !this.state.show
+        this.setState({ show: doesShow });
+        // console.log(doesShow);
+    }
+
+    cambiarNombre = ( newName ) => {
+        this.setState({
+            persons: [ 
+                { name: "El Huguez" , edad: 30 },
+                { name: newName , edad: 25 },
+                { name: "Ilyana" , edad: 20 },
+            ]
+        });
     }
 
     NombreCambiado = (event) => {
@@ -47,24 +56,29 @@ class App extends Component {
                 <h1>Hi, I'm a React App</h1>
                     <p>{ this.atributo } Est o es una practica.</p>
 
-                    <button style={style}  onClick={() => this.cambiarNombre( "Carlos" ) } >
-                        Cambiar Nombre
+                    <button 
+                        style={style}
+                        onClick={ this.mostrar } >Cambiar Nombre
                     </button>
-                    
-                    <Person 
-                    name={ this.state.persons[0].name } 
-                    edad={ this.state.persons[0].edad } > <Msn/> </Person>
-                    
-                    <Person 
-                    func={ this.cambiarNombre.bind( this, "Alonso" ) } 
-                    click={ this.cambiarNombre.bind( this, "Sylvi" ) }
-                    changed={ this.NombreCambiado }
-                    name={ this.state.persons[1].name } 
-                    edad={ this.state.persons[1].edad } > <Msn hobies="y mis hobbies son: ..." /> </Person>
-                    
-                    <Person 
-                    name={ this.state.persons[2].name } 
-                    edad={ this.state.persons[2].edad } > y mis hobbies son: ...  </Person>
+                    { this.state.show ?
+                        
+                    <div>
+                        <Person 
+                        name={ this.state.persons[0].name } 
+                        edad={ this.state.persons[0].edad } > <Msn/> </Person>
+                        
+                        <Person 
+                            func={ this.cambiarNombre.bind( this, "Alonso" ) } 
+                            click={ this.cambiarNombre.bind( this, "Sylvi" ) }
+                            changed={ this.NombreCambiado }
+                            name={ this.state.persons[1].name } 
+                            edad={ this.state.persons[1].edad } > <Msn hobies="y mis hobbies son: ..." /> </Person>
+                            
+                        <Person 
+                        name={ this.state.persons[2].name } 
+                        edad={ this.state.persons[2].edad } > y mis hobbies son: ...  </Person>
+                    </div>
+                    : null }
             </div>
         );
         // return React.createElement( 'div', null, React.createElement( 'h1', null, "Hi, I'm a React App" ) );
