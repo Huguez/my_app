@@ -7,9 +7,9 @@ import Msn from './Msn/Msn';
 class App extends Component {
     state = {
         persons:[ 
-            {name:"Huguez" , edad: 30 },
-            {name:"Sylvia" , edad: 20 },
-            {name:"Erick" , edad: 25 },
+            {id: '1', name:"Huguez" , edad: 30 },
+            {id: '2', name:"Sylvia" , edad: 20 },
+            {id: '3', name:"Erick" , edad: 25 },
         ],
         otherState: "otro estado de prueba",
         show: false
@@ -20,37 +20,28 @@ class App extends Component {
     mostrar = () => {
         const doesShow = !this.state.show
         this.setState({ show: doesShow });
-        // console.log(doesShow);
     }
 
-    // cambiarNombre = ( newName ) => {
-    //     this.setState({
-    //         persons: [ 
-    //             { name: "El Huguez" , edad: 30 },
-    //             { name: newName , edad: 25 },
-    //             { name: "Ilyana" , edad: 20 },
-    //         ]
-    //     });
-    // }
-
-
     borrarPersona = (index) => {
-        // console.log( this.state.persons );
-        // const people = this.state.persons.splice(0);
         const people = [ ...this.state.persons ];
         people.splice( index, 1 );
         this.setState( { persons: people } );
-        // console.log( people );
     }
 
-    NombreCambiado = (event) => {
-        this.setState({
-            persons: [ 
-                { name: "El Huguez" , edad: 30 },
-                { name: event.target.value , edad: 25 },
-                { name: "Ilyana" , edad: 20 },
-            ]
-        });
+    cambiarNombre = (event, id) => {
+        const personIndex = this.state.persons.findIndex( p => { return p.id === id } )
+        
+        const person = { ...this.state.persons[personIndex] };
+        // const person = Object.assign( {}, this.state.persons[personIndex] );
+
+        person.name = event.target.value;
+
+        const people = [ ...this.state.persons ];
+        
+        people[personIndex] = person;
+
+        this.setState( { persons: people } );
+
     };
 
     render() {
@@ -68,18 +59,12 @@ class App extends Component {
                 <div>
                     { this.state.persons.map( ( p, index ) =>{
                         return <Person
+                            key={ p.id }
+                            changed={ ( event ) => this.cambiarNombre( event, p.id )  }
                             click={ () => this.borrarPersona(index) }
                             name={ p.name }
                             edad={ p.edad } > <Msn/> </Person>
                     } ) }
-                    
-                    {/* <Person 
-                        func={ this.cambiarNombre.bind( this, "Alonso" ) } 
-                        click={ this.cambiarNombre.bind( this, "Sylvi" ) }
-                        changed={ this.NombreCambiado }
-                        name={ this.state.persons[1].name } 
-                        edad={ this.state.persons[1].edad } > <Msn hobies="y mis hobbies son: ..." /> </Person>
-                         */}
                 </div>
             );
         }
@@ -96,48 +81,7 @@ class App extends Component {
                     { personas }
             </div>
         );
-        // return React.createElement( 'div', null, React.createElement( 'h1', null, "Hi, I'm a React App" ) );
     }
 }
 
 export default App;
-
-// const app = ( props ) => {
-//     const [ personsState, setPersonsState ] = useState({
-//         persons:[ 
-//             {name:"Huguez" , edad: 30 },
-//             {name:"Sylvia" , edad: 20 },
-//             {name:"Erick" , edad: 25 },
-//         ],
-//         otherState: "otro estado de prueba"
-//     });
-    
-//     const [ other, setOther ] = useState({
-//         otherState: "otro valor de prueba"
-//     });
-
-//     const cambiarNombre = () => {
-//         setPersonsState( {
-//             persons: [ 
-//                 { name: "Carlos", edad: 30 },
-//                 { name: "Ilyana", edad: 20 },
-//                 { name: "Fernando", edad: 25 },
-//             ],
-//             otherState: " otro estado de prueba"
-//         });
-//     };
-
-//     return ( 
-//         <div className = "App" >
-//             <h1>Hi, I'm a React App</h1>
-//                 <p>{ this.variable } y esto es una practica.</p>
-//                 <button onClick={ cambiarNombre } >Cambiar Nombre</button>
-//                 <Person name={ personsState.persons[0].name } edad={ personsState.persons[0].edad } > <Msn/> </Person>
-//                 <Person name={ personsState.persons[1].name } edad={ personsState.persons[1].edad } > <Msn hobies="y mis hobbies son: ..." /> </Person>
-//                 <Person name={ personsState.persons[2].name } edad={ personsState.persons[2].edad } > y mis hobbies son: ...  </Person>
-//         </div>
-//     );
-//     // return React.createElement( 'div', null, React.createElement( 'h1', null, "Hi, I'm a React App" ) );
-// }
-
-// export default app;
