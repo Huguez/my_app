@@ -51,6 +51,29 @@ class App extends Component {
             padding: '8px'
         };
 
+        let personas = null;
+
+        if( this.state.show ){
+            personas = ( 
+                <div>
+                    <Person 
+                        name={ this.state.persons[0].name } 
+                        edad={ this.state.persons[0].edad } > <Msn/> </Person>
+                    
+                    <Person 
+                        func={ this.cambiarNombre.bind( this, "Alonso" ) } 
+                        click={ this.cambiarNombre.bind( this, "Sylvi" ) }
+                        changed={ this.NombreCambiado }
+                        name={ this.state.persons[1].name } 
+                        edad={ this.state.persons[1].edad } > <Msn hobies="y mis hobbies son: ..." /> </Person>
+                        
+                    <Person 
+                        name={ this.state.persons[2].name } 
+                        edad={ this.state.persons[2].edad } > y mis hobbies son: ...  </Person>
+                </div>
+            );
+        }
+
         return ( 
             <div className = "App" >
                 <h1>Hi, I'm a React App</h1>
@@ -60,25 +83,7 @@ class App extends Component {
                         style={style}
                         onClick={ this.mostrar } >Cambiar Nombre
                     </button>
-                    { this.state.show ?
-                        
-                    <div>
-                        <Person 
-                        name={ this.state.persons[0].name } 
-                        edad={ this.state.persons[0].edad } > <Msn/> </Person>
-                        
-                        <Person 
-                            func={ this.cambiarNombre.bind( this, "Alonso" ) } 
-                            click={ this.cambiarNombre.bind( this, "Sylvi" ) }
-                            changed={ this.NombreCambiado }
-                            name={ this.state.persons[1].name } 
-                            edad={ this.state.persons[1].edad } > <Msn hobies="y mis hobbies son: ..." /> </Person>
-                            
-                        <Person 
-                        name={ this.state.persons[2].name } 
-                        edad={ this.state.persons[2].edad } > y mis hobbies son: ...  </Person>
-                    </div>
-                    : null }
+                    { personas }
             </div>
         );
         // return React.createElement( 'div', null, React.createElement( 'h1', null, "Hi, I'm a React App" ) );
