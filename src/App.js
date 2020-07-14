@@ -23,14 +23,24 @@ class App extends Component {
         // console.log(doesShow);
     }
 
-    cambiarNombre = ( newName ) => {
-        this.setState({
-            persons: [ 
-                { name: "El Huguez" , edad: 30 },
-                { name: newName , edad: 25 },
-                { name: "Ilyana" , edad: 20 },
-            ]
-        });
+    // cambiarNombre = ( newName ) => {
+    //     this.setState({
+    //         persons: [ 
+    //             { name: "El Huguez" , edad: 30 },
+    //             { name: newName , edad: 25 },
+    //             { name: "Ilyana" , edad: 20 },
+    //         ]
+    //     });
+    // }
+
+
+    borrarPersona = (index) => {
+        // console.log( this.state.persons );
+        // const people = this.state.persons.splice(0);
+        const people = [ ...this.state.persons ];
+        people.splice( index, 1 );
+        this.setState( { persons: people } );
+        // console.log( people );
     }
 
     NombreCambiado = (event) => {
@@ -53,23 +63,23 @@ class App extends Component {
 
         let personas = null;
 
-        if( this.state.show ){
+        if( this.state.show ){ 
             personas = ( 
                 <div>
-                    <Person 
-                        name={ this.state.persons[0].name } 
-                        edad={ this.state.persons[0].edad } > <Msn/> </Person>
+                    { this.state.persons.map( ( p, index ) =>{
+                        return <Person
+                            click={ () => this.borrarPersona(index) }
+                            name={ p.name }
+                            edad={ p.edad } > <Msn/> </Person>
+                    } ) }
                     
-                    <Person 
+                    {/* <Person 
                         func={ this.cambiarNombre.bind( this, "Alonso" ) } 
                         click={ this.cambiarNombre.bind( this, "Sylvi" ) }
                         changed={ this.NombreCambiado }
                         name={ this.state.persons[1].name } 
                         edad={ this.state.persons[1].edad } > <Msn hobies="y mis hobbies son: ..." /> </Person>
-                        
-                    <Person 
-                        name={ this.state.persons[2].name } 
-                        edad={ this.state.persons[2].edad } > y mis hobbies son: ...  </Person>
+                         */}
                 </div>
             );
         }
