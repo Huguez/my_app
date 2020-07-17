@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 import Msn from './Msn/Msn';
+import Radium from 'radium';
 
 class App extends Component {
     state = {
@@ -15,8 +16,6 @@ class App extends Component {
         show: false
     }
     
-    atributo = "esto es la variable";
-
     mostrar = () => {
         const doesShow = !this.state.show
         this.setState({ show: doesShow });
@@ -47,9 +46,15 @@ class App extends Component {
     render() {
         const style ={
             backgroundColor: 'green',
+            color:'white',
             font: 'inherit',
             border: '1px solid blue',
-            padding: '8px'
+            cursor:'poiner',
+            padding: '8px',
+            ':hover': {
+                backgroundColor: 'lightgreen',
+                color: 'black'
+            }
         };
 
         let personas = null;
@@ -67,12 +72,28 @@ class App extends Component {
                     } ) }
                 </div>
             );
+            style.backgroundColor = 'red';
+            style[':hover'] = { 
+                backgroundColor: 'salmon',
+                color: 'black'
+            }
+        }
+        let msn = 'Todo bien';
+
+        let classes = [];
+        if( this.state.persons.length <= 2 ){
+            classes.push('red');
+            msn = 'Cuidado, solo tienes 2';
+        }
+        if( this.state.persons.length === 1 ){
+            classes.push( 'bold' );
+            msn = 'Solo te queda 1';
         }
 
         return ( 
             <div className = "App" >
                 <h1>Hi, I'm a React App</h1>
-                    <p>{ this.atributo } Est o es una practica.</p>
+                    <p className={ classes.join( ' ' ) } > { msn }.</p>
 
                     <button 
                         style={style}
@@ -84,4 +105,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Radium( App );
