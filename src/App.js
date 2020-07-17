@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import React, { useState } from 'react';
-import './App.css';
+import clases from './App.css';
 import Person from './Person/Person';
 import Msn from './Msn/Msn';
 // import Radium, { StyleRoot }from 'radium';
@@ -63,6 +63,8 @@ class App extends Component {
         
         let personas = null;
 
+        let buttonClass = [clases.Button]; 
+
         if( this.state.show ){ 
             personas = ( 
                 <div>
@@ -76,28 +78,29 @@ class App extends Component {
                     } ) }
                 </div>
             );
+            buttonClass.push( clases.Red );
         }
         let msn = 'Todo bien';
 
         let classes = [];
         if( this.state.persons.length <= 2 ){
-            classes.push('red');
+            classes.push(clases.red);
             msn = 'Cuidado, solo tienes 2';
         }
 
         if( this.state.persons.length === 1 ){
-            classes.push( 'bold' );
+            classes.push( clases.bold );
             msn = 'Solo te queda 1';
         }
 
         return (
             
-            <div className = "App" >
+            <div className = { clases.App } >
                 <h1>Hi, I'm a React App</h1>
                     <p className={ classes.join( ' ' ) } > { msn }.</p>
 
                     <button
-                        className="button"
+                        className={ buttonClass.join(' ') }
                         onClick={ this.mostrar } >Cambiar Nombre
                     </button>
                     { personas }
