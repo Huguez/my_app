@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 import Msn from './Msn/Msn';
-import Radium from 'radium';
+import Radium, { StyleRoot }from 'radium';
 
 class App extends Component {
     state = {
@@ -90,7 +90,8 @@ class App extends Component {
             msn = 'Solo te queda 1';
         }
 
-        return ( 
+        return (
+            <StyleRoot>
             <div className = "App" >
                 <h1>Hi, I'm a React App</h1>
                     <p className={ classes.join( ' ' ) } > { msn }.</p>
@@ -101,6 +102,7 @@ class App extends Component {
                     </button>
                     { personas }
             </div>
+            </StyleRoot>
         );
     }
 }
