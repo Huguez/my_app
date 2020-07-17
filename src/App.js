@@ -3,7 +3,23 @@ import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 import Msn from './Msn/Msn';
-import Radium, { StyleRoot }from 'radium';
+// import Radium, { StyleRoot }from 'radium';
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+    background-color: green;
+    color: white;
+    font: inherit;
+    border: 1px solid blue;
+    cursor: poiner;
+    padding: 8px;
+    
+    &:hover: {
+        background-color: 'lightgreen',
+        color: 'black'
+    }
+`;
+
 
 class App extends Component {
     state = {
@@ -45,16 +61,7 @@ class App extends Component {
 
     render() {
         const style ={
-            backgroundColor: 'green',
-            color:'white',
-            font: 'inherit',
-            border: '1px solid blue',
-            cursor:'poiner',
-            padding: '8px',
-            ':hover': {
-                backgroundColor: 'lightgreen',
-                color: 'black'
-            }
+            
         };
 
         let personas = null;
@@ -85,26 +92,25 @@ class App extends Component {
             classes.push('red');
             msn = 'Cuidado, solo tienes 2';
         }
+
         if( this.state.persons.length === 1 ){
             classes.push( 'bold' );
             msn = 'Solo te queda 1';
         }
 
         return (
-            <StyleRoot>
+            
             <div className = "App" >
                 <h1>Hi, I'm a React App</h1>
                     <p className={ classes.join( ' ' ) } > { msn }.</p>
 
-                    <button 
-                        style={style}
+                    <StyledButton 
                         onClick={ this.mostrar } >Cambiar Nombre
-                    </button>
+                    </StyledButton>
                     { personas }
             </div>
-            </StyleRoot>
         );
     }
 }
 
-export default Radium( App );
+export default App;
