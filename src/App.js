@@ -7,16 +7,16 @@ import Msn from './Msn/Msn';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-    background-color: green;
+    background-color: ${ props => props.boleano ? 'red' : 'green' };
     color: white;
     font: inherit;
     border: 1px solid blue;
     cursor: poiner;
     padding: 8px;
     
-    &:hover: {
-        background-color: 'lightgreen',
-        color: 'black'
+    :hover {
+        background-color: ${ props => props.boleano ? 'salmon' : 'lightgreen' };
+        color: 'black';
     }
 `;
 
@@ -60,10 +60,7 @@ class App extends Component {
     };
 
     render() {
-        const style ={
-            
-        };
-
+        
         let personas = null;
 
         if( this.state.show ){ 
@@ -79,11 +76,6 @@ class App extends Component {
                     } ) }
                 </div>
             );
-            style.backgroundColor = 'red';
-            style[':hover'] = { 
-                backgroundColor: 'salmon',
-                color: 'black'
-            }
         }
         let msn = 'Todo bien';
 
@@ -104,7 +96,8 @@ class App extends Component {
                 <h1>Hi, I'm a React App</h1>
                     <p className={ classes.join( ' ' ) } > { msn }.</p>
 
-                    <StyledButton 
+                    <StyledButton
+                        boleano={ this.state.show } 
                         onClick={ this.mostrar } >Cambiar Nombre
                     </StyledButton>
                     { personas }
