@@ -4,21 +4,21 @@ import './App.css';
 import Person from './Person/Person';
 import Msn from './Msn/Msn';
 // import Radium, { StyleRoot }from 'radium';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
-const StyledButton = styled.button`
-    background-color: ${ props => props.boleano ? 'red' : 'green' };
-    color: white;
-    font: inherit;
-    border: 1px solid blue;
-    cursor: poiner;
-    padding: 8px;
+// const StyledButton = styled.button`
+//     background-color: ${ props => props.boleano ? 'red' : 'green' };
+//     color: white;
+//     font: inherit;
+//     border: 1px solid blue;
+//     cursor: poiner;
+//     padding: 8px;
     
-    :hover {
-        background-color: ${ props => props.boleano ? 'salmon' : 'lightgreen' };
-        color: 'black';
-    }
-`;
+//     :hover {
+//         background-color: ${ props => props.boleano ? 'salmon' : 'lightgreen' };
+//         color: 'black';
+//     }
+// `;
 
 
 class App extends Component {
@@ -96,12 +96,14 @@ class App extends Component {
                 <h1>Hi, I'm a React App</h1>
                     <p className={ classes.join( ' ' ) } > { msn }.</p>
 
-                    <StyledButton
-                        boleano={ this.state.show } 
+                    <button
+                        className="button"
                         onClick={ this.mostrar } >Cambiar Nombre
-                    </StyledButton>
+                    </button>
                     { personas }
+            
             </div>
+
         );
     }
 }
