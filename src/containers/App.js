@@ -25,8 +25,8 @@ class App extends Component {
     // descontinuada la puedes usar batu propio riesgo!!
     // componentWillMount(){
     //     console.log("App.js componentWillMount");
-    // }
-
+    // } 
+ 
     static getDerivedStateFromProps( props, state ){
         console.log("Appjs  getDerivedStateFromProps!!! ", props);
         return state;
