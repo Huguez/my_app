@@ -1,32 +1,14 @@
 import React, { Component } from 'react';
-// import React, { useState } from 'react';
+
 import clases from './App.css';
 import Persons from '../components/Personas/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-//import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
-
-
-
-// import Radium, { StyleRoot }from 'radium';
-// import styled from 'styled-components';
-
-// const StyledButton = styled.button`
-//     background-color: ${ props => props.boleano ? 'red' : 'green' };
-//     color: white;
-//     font: inherit;
-//     border: 1px solid blue;
-//     cursor: poiner;
-//     padding: 8px;
-    
-//     :hover {
-//         background-color: ${ props => props.boleano ? 'salmon' : 'lightgreen' };
-//         color: 'black';
-//     }
-// `;
-
 
 class App extends Component {
+    
+    
+    
     state = {
         persons:[ 
             {id: '1', name:"Huguez" , edad: 30 },
@@ -52,7 +34,6 @@ class App extends Component {
         const personIndex = this.state.persons.findIndex( p => { return p.id === id } )
         
         const person = { ...this.state.persons[personIndex] };
-        // const person = Object.assign( {}, this.state.persons[personIndex] );
 
         person.name = event.target.value;
 
