@@ -2,7 +2,9 @@ import React from 'react';
 import Person from './Person/Person';
 import Msn from '../Msn/Msn';
 
-const persons = ( props ) =>  ( props.personas.map( ( p, index ) =>{
+const persons = ( props ) =>   {
+    console.log("Persons.js rendering...");
+    return props.personas.map( ( p, index ) =>{
         return <Person
             key={ p.id }
             changed={ ( event ) => props.changed( event, p.id )  }
@@ -10,8 +12,7 @@ const persons = ( props ) =>  ( props.personas.map( ( p, index ) =>{
             name={ p.name }
             edad={ p.edad } > <Msn/>
         </Person>
-    } )
-);
-
+    }
+);}
 
 export default persons;
