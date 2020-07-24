@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 import Msn from '../Msn/Msn';
 
-class Persons extends Component   {
+class Persons extends PureComponent   {
     // static getDerivedStateFromProps( props, state ){
     //     console.log("Persons.js  getDerivedStateFromProps!!! ");
     //     return state;
@@ -13,13 +13,15 @@ class Persons extends Component   {
     //     console.log("Persons.js componentWillReceiveProps() {");
     // }
 
-    shouldComponentUpdate( nextProps, nextState ){ //Componente Basado en Clases!!!!!
-        console.log("Persons.js shouldComponentUpdate");
-        if( nextProps.personas !== this.props.personas ){
-            return true;
-        }
-        return false;
-    }
+    // shouldComponentUpdate( nextProps, nextState ){ //Componente Basado en Clases!!!!!
+    //     console.log("Persons.js shouldComponentUpdate");
+    //     if( nextProps.personas !== this.props.personas ||
+    //         nextProps.changed  !== this.props.changed  ||
+    //         nextProps.clicked  !== this.props.clicked  ){
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     // componentWillUpdate(){
 
