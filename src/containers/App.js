@@ -19,7 +19,8 @@ class App extends Component {
             {id: '3', name:"Erick" , edad: 25 },
         ],
         otherState: "otro estado de prueba",
-        show: false
+        show: false,
+        showCockpit: true
     }
 
     // descontinuada la puedes usar batu propio riesgo!!
@@ -87,13 +88,15 @@ class App extends Component {
 
 
         return (
-            
             <div className = { clases.App } >
+                <button onClick={ () => { this.setState({ showCockpit: !this.state.showCockpit }) } } >Remove Cockpit</button>
+                { this.state.showCockpit ?
                 <Cockpit
                     titulo={ this.props.title }
                     clickeado={ this.mostrar }
                     show={ this.state.show }
                     personas={ this.state.persons } />
+                    : null }
                 { personas }
             </div>
 

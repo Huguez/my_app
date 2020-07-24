@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import classes from './Cockpit.css'
 
 const Cockpit = (props)  => {
+
+    useEffect(()=>{
+        console.log("Cockpit.js useEffect");
+        // Http Request ...
+        const timer = setTimeout( ()=>{ //se disparara el useEffect
+            alert( "saved data to cloud" );
+        }, 1000 );
+        return () =>{
+            clearTimeout( timer );
+            console.log("Cockpit.js Cleanup work in useEffect");
+        }
+    }, []); // cuando cambian estos parametros
+
+    useEffect( () =>{
+        console.log("Cockpit.js 2ND useEffect");
+        return () =>{
+            console.log("Cockpit.js Cleanup 2nd work in useEffect");
+        } 
+    });
+
     let msn = 'Todo bien';
     let btnclas = '';
 
