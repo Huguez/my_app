@@ -71,9 +71,12 @@ class App extends Component {
         
         people[personIndex] = person;
 
-        this.setState( { persons: people } );
-
-    };
+        this.setState(( prevState, props ) => {
+            return {
+                persons: people
+            }
+        });
+    }
 
     render() {
         console.log("App.js render");

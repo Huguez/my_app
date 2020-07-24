@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-// import clases from './Person.css';
-
+import clases from './Person.css';
+import WithClass from '../../../hoc/WithClass';
 // import Aux from '../../../hoc/Aux'; 
 
 
@@ -13,9 +13,7 @@ class Person extends Component {
         console.log("Person.js rendering");
 
         return( 
-            <React.Fragment>
-
-            
+            <React.Fragment>            
             {/* <Aux> */}
                 <h2 onClick={ this.props.click } > Soy { nombre } con { edad } years !! </h2>
                 <p> { this.props.children } </p>
@@ -31,4 +29,4 @@ class Person extends Component {
     }
 }
 
-export default Person;
+export default WithClass(Person, clases.Person);
