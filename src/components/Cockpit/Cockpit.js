@@ -32,12 +32,12 @@ const Cockpit = (props)  => {
         btnclas = classes.red;
     }
     
-    if( props.personas.length === 2 ){
+    if( props.personasLength === 2 ){
         assinedclasses.push(classes.red);
         msn = 'Cuidado, solo tienes 2';
     }
 
-    if( props.personas.length <= 1 ){
+    if( props.personasLength <= 1 ){
         assinedclasses.push( classes.bold );
         assinedclasses.push( classes.red );
         msn = 'Solo te queda 1';
@@ -54,4 +54,4 @@ const Cockpit = (props)  => {
         </div> );
 };
 
-export default Cockpit;
+export default React.memo( Cockpit ); // componente functional

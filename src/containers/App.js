@@ -95,7 +95,7 @@ class App extends Component {
                     titulo={ this.props.title }
                     clickeado={ this.mostrar }
                     show={ this.state.show }
-                    personas={ this.state.persons } />
+                    personasLength={ this.state.persons.length } />
                     : null }
                 { personas }
             </div>

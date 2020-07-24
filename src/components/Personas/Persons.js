@@ -13,9 +13,12 @@ class Persons extends Component   {
     //     console.log("Persons.js componentWillReceiveProps() {");
     // }
 
-    shouldComponentUpdate( nextProps, nextState ){
+    shouldComponentUpdate( nextProps, nextState ){ //Componente Basado en Clases!!!!!
         console.log("Persons.js shouldComponentUpdate");
-        return true;
+        if( nextProps.personas !== this.props.personas ){
+            return true;
+        }
+        return false;
     }
 
     // componentWillUpdate(){
@@ -29,6 +32,7 @@ class Persons extends Component   {
 
     componentDidUpdate(prevProps, prevState, snapshot ){
         console.log("Persons.js   componentDidUpdat");
+        
         console.log(snapshot);
     }
 
