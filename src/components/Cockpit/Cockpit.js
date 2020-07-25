@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import classes from './Cockpit.css'
 
 const Cockpit = (props)  => {
 
+    const toggleBtnRef = useRef(null);
+    
     useEffect(()=>{
         console.log("Cockpit.js useEffect");
+        toggleBtnRef.current.click();
         // Http Request ...
-        const timer = setTimeout( ()=>{ //se disparara el useEffect
-            alert( "saved data to cloud" );
-        }, 1000 );
+        // const timer = setTimeout( ()=>{ //se disparara el useEffect
+        //     alert( "saved data to cloud" );
+        // }, 1000 );
+        
         return () =>{
-            clearTimeout( timer );
+            // clearTimeout( timer );
             console.log("Cockpit.js Cleanup work in useEffect");
         }
     }, []); // cuando cambian estos parametros
@@ -48,6 +52,7 @@ const Cockpit = (props)  => {
             <h1> { props.titulo } </h1>
             <p className={ assinedclasses.join( ' ' ) } > { msn }.</p>
             <button
+                ref={ toggleBtnRef }
                 className={ btnclas }
                 onClick={ props.clickeado  } >Cambiar Nombre
             </button>            
