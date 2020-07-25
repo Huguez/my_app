@@ -5,7 +5,7 @@ import Persons from '../components/Personas/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import WithClass from '../hoc/WithClass';
 import Aux from '../hoc/Aux';
-
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
     
@@ -22,7 +22,12 @@ class App extends Component {
         ],
         otherState: "otro estado de prueba",
         show: false,
-        showCockpit: true
+        showCockpit: true,
+        authenticated: false
+    }
+
+    login = () =>{
+        this.setState( { authenticated: true } );
     }
 
     // descontinuada la puedes usar batu propio riesgo!!
@@ -84,25 +89,30 @@ class App extends Component {
 
         if( this.state.show ){ 
             personas = ( 
-                < Persons
+                <Persons
+
+                    isAuthenticated={ this.state.authenticated }
                     personas={ this.state.persons }
                     clicked={ this.borrarPersona }
                     changed={ this.cambiarNombre } />
             );
         }
 
-
         return (
             <Aux  >
                 <button onClick={ () => { this.setState({ showCockpit: !this.state.showCockpit }) } } >Remove Cockpit</button>
-                { this.state.showCockpit ?
-                <Cockpit
-                    titulo={ "Hi, I'm a React App" }
-                    clickeado={ this.mostrar }
-                    show={ this.state.show }
-                    personasLength={ this.state.persons.length } />
-                    : null }
-                { personas }
+                
+                <AuthContext.Provider value={ { authenticated: this.state.authenticated , login: this.login } } >
+                    { this.state.showCockpit ?
+                    <Cockpit
+                        titulo={ "Hi, I'm a React App" }
+                        clickeado={ this.mostrar }
+                        login={ this.login }
+                        show={ this.state.show }
+                        personasLength={ this.state.persons.length } />
+                        : null }
+                        { personas }
+                </AuthContext.Provider>
             </Aux>
 
         );

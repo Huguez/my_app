@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import clases from './Person.css';
 import WithClass from '../../../hoc/WithClass';
-// import Aux from '../../../hoc/Aux'; 
+import Aux from '../../../hoc/Aux'; 
 import PropTypes from 'prop-types';
+
+import AuthContext from '../../../context/auth-context';
+
 
 class Person extends Component {
 
@@ -11,9 +14,12 @@ class Person extends Component {
         this.inputElemntRef = React.createRef();
     }
 
+    // static contextType = AuthContext;
+
     componentDidMount(){
         // this.inputElemnt.focus();
         this.inputElemntRef.current.focus();
+        // console.log( "this.context: ", this.context.authenticated );
     }
 
     render(){
@@ -22,9 +28,13 @@ class Person extends Component {
         const rnd = Math.random();
         console.log("Person.js rendering");
 
-        return( 
-            <React.Fragment>            
-            {/* <Aux> */}
+        return(
+            <Aux>
+                <AuthContext.Consumer>
+                    {context => 
+                        context.authenticated ? <p>Estas Dentro</p> : <p>Logeate bato</p>  
+                    }
+                </AuthContext.Consumer>
                 <h2 onClick={ this.props.click } > Soy { nombre } con { edad } years !! </h2>
                 <p> { this.props.children } </p>
                 <p>{ rnd }</p>
@@ -34,10 +44,9 @@ class Person extends Component {
                     type="text"
                     onChange={ this.props.changed } 
                     value={ this.props.name }  />
-            </React.Fragment>
-            // </Aux>
+            </Aux>
         // <div className={clases.Person} ></div>
-         );   
+        );   
     }
 }
 
